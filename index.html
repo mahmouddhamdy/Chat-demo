@@ -77,22 +77,16 @@
         e.preventDefault();
         if (input.value) {
           socket.emit("chat message", input.value);
-          appendMessage("You: " + input.value, "sent-message");
           input.value = "";
         }
       });
 
       socket.on("chat message", function (msg) {
-        appendMessage(msg, "received-message");
-      });
-
-      function appendMessage(message, className) {
         var item = document.createElement("li");
-        item.textContent = message;
-        item.classList.add(className);
+        item.textContent = msg;
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
-      }
+      });
     </script>
   </body>
 </html>
